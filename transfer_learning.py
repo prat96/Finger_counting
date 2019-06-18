@@ -1,5 +1,5 @@
 # shuf -n 10 -e * | xargs -i mv {} path-to-new-folder
-from keras import regularizers
+
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D
@@ -12,13 +12,16 @@ from keras.models import Model
 import numpy as np
 import cv2
 import os
+# from keras import backend as K
+
+# K.set_image_dim_ordering('th')
 
 from keras.regularizers import l2
 
 nbatch = 128
 
 train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=12., width_shift_range=0.2, height_shift_range=0.2,
-                                   zoom_range=0.15, horizontal_flip=False)
+                                   zoom_range=0.15, shear_range=0.2, horizontal_flip=True, fill_mode='nearest')
 
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
@@ -35,13 +38,13 @@ test_gen = test_datagen.flow_from_directory('./datasets/fingers_new/test/', targ
 base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224,224,3))
 
 x = base_model.output
-x = Conv2D(64, (3,3), activation='relu', input_shape=(224,224,3))(x)
-x = MaxPooling2D((2,2))(x)
-x = Conv2D(128, (3,3), activation='relu')(x)
-x = Conv2D(128, (3,3), activation='relu')(x)
-x = MaxPooling2D((2,2))(x)
-x = Conv2D(256, (3,3), activation='relu')(x)
-x = MaxPooling2D((2,2))(x)
+x = Conv2D(32, (3, 3), activation='relu')(x)
+# x = MaxPooling2D((2, 2))(x)
+x = Conv2D(64, (3, 3), activation='relu')(x)
+x = Conv2D(64, (3, 3), activation='relu')(x)
+# x = MaxPooling2D((2, 2))(x)
+# x = Conv2D(128, (3, 3), activation='relu')(x)
+# x = MaxPooling2D((2, 2))(x)
 x = Flatten()(x)
 x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
 x = Dropout(0.5)(x)
@@ -49,17 +52,14 @@ x = Dense(256, activation='relu')(x)
 x = Dropout(0.4)(x)
 preds = Dense(6, activation='softmax')(x)
 
-
-"""
-x = base_model.output
-x = Flatten()(x)
-x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
-x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
-x = Dropout(0.4)(x)
-x = Dense(256, activation='relu')(x)
-x = Dropout(0.3)(x)
-preds = Dense(6, activation='softmax')(x)
-"""
+# x = base_model.output
+# x = GlobalAveragePooling2D()(x)
+# x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
+# x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
+# x = Dropout(0.4)(x)
+# x = Dense(256, activation='relu')(x)
+# x = Dropout(0.3)(x)
+# preds = Dense(6, activation='softmax')(x)
 
 """
 model = Sequential()
