@@ -124,10 +124,10 @@ def predict_img(img_path):
     print(predictions.argmax(axis=-1))
 
 
-predict_img('zero_test.png')
-predict_img('one_test.png')
-predict_img('two_test.jpg')
-predict_img('three_test.jpg')
-predict_img('four_test.jpg')
-predict_img('five_test.jpg')
+predict_img('./test_images/zero_test.png')
+predict_img('./test_images/one_test.png')
+predict_img('./test_images/two_test.jpg')
+predict_img('./test_images/three_test.jpg')
+predict_img('./test_images/four_test.jpg')
+predict_img('./test_images/five_test.jpg')
 
