@@ -1,12 +1,10 @@
 # shuf -n 10 -e * | xargs -i mv {} path-to-new-folder
 
 from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
 from keras.layers import Conv2D
 from keras.layers import Dense, GlobalAveragePooling2D
 from keras.layers import Dropout
 from keras.layers import Flatten
-from keras.layers import MaxPooling2D
 from keras.applications import MobileNetV2
 from keras.models import Model
 import numpy as np
@@ -35,8 +33,11 @@ test_gen = test_datagen.flow_from_directory('./datasets/fingers_new/test/', targ
                                             classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                             class_mode='categorical')
 
+print(test_gen.class_indices)
+
 base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224,224,3))
 
+"""
 x = base_model.output
 x = Conv2D(32, (3, 3), activation='relu')(x)
 # x = MaxPooling2D((2, 2))(x)
@@ -51,15 +52,20 @@ x = Dropout(0.5)(x)
 x = Dense(256, activation='relu')(x)
 x = Dropout(0.4)(x)
 preds = Dense(6, activation='softmax')(x)
+"""
 
-# x = base_model.output
+x = base_model.output
+x = Flatten()(x)
 # x = GlobalAveragePooling2D()(x)
-# x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
-# x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
-# x = Dropout(0.4)(x)
-# x = Dense(256, activation='relu')(x)
-# x = Dropout(0.3)(x)
-# preds = Dense(6, activation='softmax')(x)
+x = Dense(2048, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
+x = Dropout(0.3)(x)
+x = Dense(1024, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
+x = Dropout(0.4)(x)
+x = Dense(512, activation='relu')(x)
+x = Dropout(0.4)(x)
+x = Dense(512, activation='relu')(x)
+x = Dropout(0.4)(x)
+preds = Dense(6, activation='softmax')(x)
 
 """
 model = Sequential()
@@ -106,6 +112,7 @@ history = model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs
 
 def predict_img(img_path):
     img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (224, 224))
     img = np.expand_dims(img, axis=0)
 

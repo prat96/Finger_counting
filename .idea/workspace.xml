@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="017b8719-d507-437e-b05c-803c90257149" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transfer_learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/transfer_learning.py" afterDir="false" />
@@ -19,12 +18,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/transfer_learning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+            <state relative-caret-position="906">
+              <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
               <folding>
                 <element signature="e#55#111#0" expanded="true" />
-                <element signature="e#2175#2198#0" />
-                <element signature="e#1916#2574#1" />
+                <element signature="e#1706#2237#1" />
+                <element signature="e#2607#3265#1" />
               </folding>
             </state>
           </provider>
@@ -34,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
-              <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+              <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -81,6 +80,11 @@
             <path>
               <item name="finger_counting" type="b2602c69:ProjectViewProjectNode" />
               <item name="finger_counting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="finger_counting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="finger_counting" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -168,7 +172,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32872504" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.18360655" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -283,22 +287,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/transfer_learning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+        <state relative-caret-position="906">
+          <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
+          <folding>
+            <element signature="e#55#111#0" expanded="true" />
+            <element signature="e#1706#2237#1" />
+            <element signature="e#2607#3265#1" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/transfer_learning.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
-          <folding>
-            <element signature="e#55#111#0" expanded="true" />
-            <element signature="e#2175#2198#0" />
-            <element signature="e#1916#2574#1" />
-          </folding>
+        <state relative-caret-position="88">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
         </state>
       </provider>
     </entry>
