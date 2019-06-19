@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="017b8719-d507-437e-b05c-803c90257149" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zero_test.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/git_repos/CNN-HowManyFingers/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transfer_learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/transfer_learning.py" afterDir="false" />
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/transfer_learning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="906">
-              <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
+            <state relative-caret-position="1206">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="e#55#111#0" expanded="true" />
                 <element signature="e#1706#2237#1" />
@@ -86,6 +87,19 @@
               <item name="finger_counting" type="462c0819:PsiDirectoryNode" />
               <item name="datasets" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="finger_counting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="finger_counting" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+              <item name="fingers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="finger_counting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="finger_counting" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+              <item name="fingers" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -95,11 +109,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/datasets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/datasets" />
       <recent name="$PROJECT_DIR$/fingers" />
     </key>
@@ -163,7 +178,7 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.22991249" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.23389022" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3293348" />
@@ -172,7 +187,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.18360655" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33870968" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -182,29 +197,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Tensorflow/sandbox_/cnn_mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Tensorflow/sandbox_/fashion_mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Tensorflow/sandbox_/transfer_learning/flowers_transfer_learning.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fingers/train/0L/0a6a5f66-0528-426f-a63e-317c2b1dcc14_0L.png" />
-    <entry file="file://$PROJECT_DIR$/fingers/train/0L/0b8bfdd0-a1e8-4071-87a2-665cab0ffae7_0L.png" />
     <entry file="file://$PROJECT_DIR$/fingers/5_test.png" />
     <entry file="file://$PROJECT_DIR$/../keras-tutorial/pyimagesearch/lenet.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -269,9 +261,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one_test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/two.jpg" />
     <entry file="file://$PROJECT_DIR$/datasets/transfer_learning.py" />
     <entry file="file://$PROJECT_DIR$/../Tensorflow/sandbox_/transfer_learning/cats_vs_dogs.py">
@@ -287,22 +276,124 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/two0444.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/two0185.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00024_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00018.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00015.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00071_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00098.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00083.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00044.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00006.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00003.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00016.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/output_00004.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/three_test.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/output_00026.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00033_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00022.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00166.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00279.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00257.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/xyz_00348.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/zero0324.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/ZERO/zero0161.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/two0031.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00020_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/TWO/xyz_00030.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FOUR/output_00029_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FOUR/output_00036.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FIVE/output_00053.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FIVE/five0258.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FIVE/xyz_00028.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FIVE/xyz_00040.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/fingers/test/FIVE/xyz_00016.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/transfer_learning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="906">
-          <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
+        <state relative-caret-position="1206">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
           <folding>
             <element signature="e#55#111#0" expanded="true" />
             <element signature="e#1706#2237#1" />
             <element signature="e#2607#3265#1" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
         </state>
       </provider>
     </entry>

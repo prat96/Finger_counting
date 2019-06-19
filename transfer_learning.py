@@ -8,34 +8,35 @@ from keras.layers import Flatten
 from keras.applications import MobileNetV2
 from keras.models import Model
 import numpy as np
+from keras import optimizers
 import cv2
 import os
 # from keras import backend as K
-
 # K.set_image_dim_ordering('th')
 
 from keras.regularizers import l2
 
 nbatch = 128
+print("Batch size = ", nbatch, "\n")
 
 train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=12., width_shift_range=0.2, height_shift_range=0.2,
                                    zoom_range=0.15, shear_range=0.2, horizontal_flip=True, fill_mode='nearest')
 
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-train_gen = train_datagen.flow_from_directory('./datasets/fingers_new/train/', target_size=(224, 224), color_mode='rgb',
+train_gen = train_datagen.flow_from_directory('./datasets/fingers/train/', target_size=(224, 224), color_mode='rgb',
                                               batch_size=nbatch, shuffle=True,
                                               classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                               class_mode='categorical')
 
-test_gen = test_datagen.flow_from_directory('./datasets/fingers_new/test/', target_size=(224, 224), color_mode='rgb',
+test_gen = test_datagen.flow_from_directory('./datasets/fingers/test/', target_size=(224, 224), color_mode='rgb',
                                             batch_size=nbatch,
                                             classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                             class_mode='categorical')
 
-print(test_gen.class_indices)
+print(test_gen.class_indices, "\n")
 
-base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224,224,3))
+base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
 """
 x = base_model.output
@@ -57,7 +58,7 @@ preds = Dense(6, activation='softmax')(x)
 x = base_model.output
 x = Flatten()(x)
 # x = GlobalAveragePooling2D()(x)
-x = Dense(2048, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
+x = Dense(1024, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
 x = Dropout(0.3)(x)
 x = Dense(1024, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
 x = Dropout(0.4)(x)
@@ -65,6 +66,7 @@ x = Dense(512, activation='relu')(x)
 x = Dropout(0.4)(x)
 x = Dense(512, activation='relu')(x)
 x = Dropout(0.4)(x)
+x = Dense(128, activation='relu')(x)
 preds = Dense(6, activation='softmax')(x)
 
 """
@@ -100,14 +102,16 @@ for layer in model.layers[154:]:
     layer.trainable = True
 
 model.summary()
-model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+adam = optimizers.Adam(lr=0.0001)
+model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
 
 STEP_SIZE_TRAIN = train_gen.n // train_gen.batch_size
 STEP_SIZE_TEST = test_gen.n // test_gen.batch_size
 print(STEP_SIZE_TEST, STEP_SIZE_TRAIN)
 
-history = model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=10, validation_data=test_gen,
-                              validation_steps=STEP_SIZE_TEST)
+model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=15, validation_data=test_gen,
+                    validation_steps=STEP_SIZE_TEST)
 
 
 def predict_img(img_path):
@@ -120,5 +124,10 @@ def predict_img(img_path):
     print(predictions.argmax(axis=-1))
 
 
-predict_img('three_test.jpg')
+predict_img('zero_test.png')
 predict_img('one_test.png')
+predict_img('two_test.jpg')
+predict_img('three_test.jpg')
+predict_img('four_test.jpg')
+predict_img('five_test.jpg')
+
