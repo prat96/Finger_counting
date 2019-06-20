@@ -16,12 +16,12 @@ import glob
 
 from keras.utils import plot_model
 
-TRAIN = 0
+TRAIN = 1
+nbatch = 64
+IMG_SIZE = 256
 
+def load_data():
 
-def train_model():
-    nbatch = 32
-    IMG_SIZE = 256
     print("Batch size = ", nbatch, "\n")
 
     train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=12., width_shift_range=0.2,
@@ -30,34 +30,38 @@ def train_model():
 
     test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-    train_gen = train_datagen.flow_from_directory('./datasets/fingers_white/train/', target_size=(IMG_SIZE, IMG_SIZE),
+    train_gen = train_datagen.flow_from_directory('./datasets/rish/fingers_white/train/', target_size=(IMG_SIZE, IMG_SIZE),
                                                   color_mode='rgb',
                                                   batch_size=nbatch, shuffle=True,
                                                   classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                                   class_mode='categorical')
 
-    test_gen = test_datagen.flow_from_directory('./datasets/fingers_white/test/', target_size=(IMG_SIZE, IMG_SIZE),
+    test_gen = test_datagen.flow_from_directory('./datasets/rish/fingers_white/test/', target_size=(IMG_SIZE, IMG_SIZE),
                                                 color_mode='rgb',
                                                 batch_size=nbatch,
                                                 classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                                 class_mode='categorical')
 
+    return train_gen, test_gen
+
+def train_model(train_gen, test_gen):
+
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
-    model.add(Dropout(0.2))
+    # model.add(Dropout(0.2))
     model.add(MaxPooling2D((2, 2)))
     model.add(Conv2D(64, (3, 3), activation='relu'))
-    model.add(Conv2D(64, (3, 3), activation='relu'))
+    # model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(Dropout(0.4))
     model.add(MaxPooling2D((2, 2)))
     model.add(Conv2D(128, (3, 3), activation='relu'))
     model.add(Dropout(0.6))
     model.add(MaxPooling2D((2, 2)))
-    model.add(Conv2D(256, (3, 3), activation='relu'))
-    model.add(Dropout(0.4))
-    model.add(MaxPooling2D((2, 2)))
+    # model.add(Conv2D(256, (3, 3), activation='relu'))
+    # model.add(Dropout(0.4))
+    # model.add(MaxPooling2D((2, 2)))
     model.add(Flatten())
-    model.add(Dense(150, activation='relu'))
+    model.add(Dense(128, activation='relu'))
     model.add(Dropout(0.3))
     model.add(Dense(6, activation='softmax'))
 
@@ -69,11 +73,12 @@ def train_model():
     STEP_SIZE_TEST = test_gen.n // test_gen.batch_size
     print(STEP_SIZE_TEST, STEP_SIZE_TRAIN)
 
-    model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=4, validation_data=test_gen,
+    model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=1, validation_data=test_gen,
                         validation_steps=STEP_SIZE_TEST)
 
     plot_model(model, to_file='model.png')
 
+    return model, STEP_SIZE_TEST, STEP_SIZE_TRAIN
 
 def predict_img(img_path, model):
     img = cv2.imread(img_path)
@@ -105,4 +110,5 @@ if __name__ == '__main__':
         model = load_trained_model()
         test_predictions(model)
     else:
-        train_model()
+        train_gen, test_gen = load_data()
+        model, STEP_SIZE_TEST, STEP_SIZE_TRAIN = train_model(train_gen, test_gen)
