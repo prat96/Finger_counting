@@ -1,4 +1,5 @@
 # shuf -n 10 -e * | xargs -i mv {} path-to-new-folder
+# ffmpeg -i video.webm thumb%04d.jpg
 
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Conv2D
@@ -132,5 +133,6 @@ def test_predictions():
     predict_img('./test_images/three_test.jpg')
     predict_img('./test_images/four_test.jpg')
     predict_img('./test_images/five_test.jpg')
+
 
 test_predictions()
