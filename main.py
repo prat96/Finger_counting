@@ -1,4 +1,5 @@
 # shuf -n 10 -e * | xargs -i mv {} path-to-new-folder
+# ffmpeg -i video.webm thumb%04d.jpg -hide_banner
 
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
@@ -11,25 +12,29 @@ import numpy as np
 import cv2
 import os
 
+from keras.utils import plot_model
+
 nbatch = 64
+IMG_SIZE = 256
 
 train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=12., width_shift_range=0.2, height_shift_range=0.2,
-                                   zoom_range=0.15, horizontal_flip=True)
+                                   zoom_range=0.15, horizontal_flip=False)
 
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-train_gen = train_datagen.flow_from_directory('./datasets/fingers/train/', target_size=(224, 224), color_mode='rgb',
+train_gen = train_datagen.flow_from_directory('./datasets/fingers_white/train/', target_size=(IMG_SIZE, IMG_SIZE),
+                                              color_mode='rgb',
                                               batch_size=nbatch, shuffle=True,
                                               classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                               class_mode='categorical')
 
-test_gen = test_datagen.flow_from_directory('./datasets/fingers/test/', target_size=(224, 224), color_mode='rgb',
+test_gen = test_datagen.flow_from_directory('./datasets/fingers_white/test/', target_size=(IMG_SIZE, IMG_SIZE), color_mode='rgb',
                                             batch_size=nbatch,
                                             classes=['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'],
                                             class_mode='categorical')
 
 model = Sequential()
-model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(224, 224, 3)))
+model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
 model.add(MaxPooling2D((2, 2)))
 model.add(Conv2D(64, (3, 3), activation='relu'))
 model.add(Conv2D(64, (3, 3), activation='relu'))
@@ -54,21 +59,29 @@ print(STEP_SIZE_TEST, STEP_SIZE_TRAIN)
 history = model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=10, validation_data=test_gen,
                               validation_steps=STEP_SIZE_TEST)
 
-img = cv2.imread('./fingers/3R_test.png')
-print(img.shape)
-img = np.expand_dims(img, axis=0)
-print(img.shape)
+plot_model(model, to_file='model.png')
 
-"""
->>> img = cv2.imread('./fingers/validation2/2R.jpg')
->>> img = cv2.resize(img, (128,128))
->>> img = np.expand_dims(img, axis=0)
->>> model.predict(img)
 
-y_prob = model.predict(x) 
-y_classes = y_prob.argmax(axis=-1)
+def predict_img(img_path):
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img, (256, 256))
+    img = np.expand_dims(img, axis=0)
 
-"""
+    predictions = model.predict(img)
+    print(predictions.argmax(axis=-1))
 
-predictions = model.predict(img)
-print(np.argmax(predictions))
+
+def test_predictions():
+    predict_img('./test_images/test_white/five1.jpg')
+    predict_img('./test_images/test_white/five2.jpg')
+    predict_img('./test_images/test_white/four1.jpg')
+    predict_img('./test_images/test_white/four2.jpg')
+    predict_img('./test_images/test_white/one1.jpg')
+    predict_img('./test_images/test_white/one2.jpg')
+    predict_img('./test_images/test_white/two1.jpg')
+    predict_img('./test_images/test_white/zero1.jpg')
+    predict_img('./test_images/test_white/zero2.jpg')
+
+
+test_predictions()

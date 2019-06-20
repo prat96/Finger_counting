@@ -7,6 +7,8 @@ from keras.layers import Dropout
 from keras.layers import Flatten
 from keras.applications import MobileNetV2
 from keras.models import Model
+from keras.utils import plot_model
+
 import numpy as np
 from keras import optimizers
 import cv2
@@ -16,7 +18,7 @@ import os
 
 from keras.regularizers import l2
 
-nbatch = 128
+nbatch = 64
 print("Batch size = ", nbatch, "\n")
 
 train_datagen = ImageDataGenerator(rescale=1. / 255, rotation_range=12., width_shift_range=0.2, height_shift_range=0.2,
@@ -41,12 +43,9 @@ base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224
 """
 x = base_model.output
 x = Conv2D(32, (3, 3), activation='relu')(x)
-# x = MaxPooling2D((2, 2))(x)
 x = Conv2D(64, (3, 3), activation='relu')(x)
 x = Conv2D(64, (3, 3), activation='relu')(x)
-# x = MaxPooling2D((2, 2))(x)
 # x = Conv2D(128, (3, 3), activation='relu')(x)
-# x = MaxPooling2D((2, 2))(x)
 x = Flatten()(x)
 x = Dense(512, kernel_regularizer=l2(0.01), bias_regularizer=l2(0.01), activation='relu')(x)
 x = Dropout(0.5)(x)
@@ -111,7 +110,9 @@ STEP_SIZE_TEST = test_gen.n // test_gen.batch_size
 print(STEP_SIZE_TEST, STEP_SIZE_TRAIN)
 
 model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=15, validation_data=test_gen,
-                    validation_steps=STEP_SIZE_TEST)
+                    validation_steps=STEP_SIZE_TEST, use_multiprocessing=True)
+
+plot_model(model, to_file='model.png')
 
 
 def predict_img(img_path):
@@ -124,10 +125,12 @@ def predict_img(img_path):
     print(predictions.argmax(axis=-1))
 
 
-predict_img('./test_images/zero_test.png')
-predict_img('./test_images/one_test.png')
-predict_img('./test_images/two_test.jpg')
-predict_img('./test_images/three_test.jpg')
-predict_img('./test_images/four_test.jpg')
-predict_img('./test_images/five_test.jpg')
+def test_predictions():
+    predict_img('./test_images/zero_test.png')
+    predict_img('./test_images/one_test.png')
+    predict_img('./test_images/two_test.jpg')
+    predict_img('./test_images/three_test.jpg')
+    predict_img('./test_images/four_test.jpg')
+    predict_img('./test_images/five_test.jpg')
 
+test_predictions()
