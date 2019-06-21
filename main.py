@@ -13,10 +13,11 @@ import numpy as np
 import cv2
 import os
 import glob
+import time
 
 from keras.utils import plot_model
 
-TRAIN = 1
+TRAIN = 0
 nbatch = 64
 IMG_SIZE = 256
 
@@ -84,6 +85,7 @@ def train_model(train_gen, test_gen):
 def predict_img(img_path, model):
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(img, (256, 256))
     img = np.expand_dims(img, axis=0)
 
@@ -93,14 +95,19 @@ def predict_img(img_path, model):
 
 def test_predictions(model):
     os.chdir("./test_images/test_white/")
+    no_of_files, avg_inference = 0, 0
     for file in glob.glob("*"):
         image_path = file
+        start = time.time()
         predict_img(image_path, model)
+        end = time.time() - start
+        avg_inference += end
+        no_of_files += 1
     os.chdir("/home/pratheek/Tonbo/Code/finger_counting")
-
+    print(avg_inference/no_of_files, no_of_files)
 
 def load_trained_model():
-    model_path = './models/fingers_white.h5'
+    model_path = './models/fingers_white_latest.h5'
     model = load_model(model_path)
 
     return model
