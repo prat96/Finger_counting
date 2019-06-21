@@ -74,7 +74,7 @@ def train_model(train_gen, test_gen):
     print(STEP_SIZE_TEST, STEP_SIZE_TRAIN)
 
     model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=5, validation_data=test_gen,
-                        validation_steps=STEP_SIZE_TEST, use_multiprocessing=True, workers=6)
+                        validation_steps=STEP_SIZE_TEST, use_multiprocessing=True, workers=10)
 
     plot_model(model, to_file='model.png')
 
