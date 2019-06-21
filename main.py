@@ -96,6 +96,7 @@ def test_predictions(model):
     for file in glob.glob("*"):
         image_path = file
         predict_img(image_path, model)
+    os.chdir("/home/pratheek/Tonbo/Code/finger_counting")
 
 
 def load_trained_model():
