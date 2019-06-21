@@ -5,3 +5,4 @@ validation2
 .idea
 test_images
 *.h5
+models
