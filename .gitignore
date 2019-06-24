@@ -6,3 +6,4 @@ validation2
 test_images
 *.h5
 models
+example.py
