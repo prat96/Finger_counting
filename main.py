@@ -19,7 +19,7 @@ from keras.utils import plot_model
 
 TRAIN = 0
 nbatch = 64
-IMG_SIZE = 256
+IMG_SIZE = 224
 
 
 def load_data():
