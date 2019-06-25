@@ -16,7 +16,7 @@ input_std = 127.5
 floating_model = False
 
 # include the path containing the model (.lite, .tflite)
-path_1 = r"./models/fingers_white_latest.tflite"
+path_1 = r"./models/converted_svdmdl.tflite"
 labels_path = "./models/labels.txt"
 
 """
