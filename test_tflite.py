@@ -4,7 +4,7 @@ from tkinter import filedialog
 import PIL
 from PIL import Image
 import numpy as np
-import cv2
+# import cv2
 import argparse
 
 # DEF. PARAMETERS
@@ -51,7 +51,7 @@ def load_labels(filename):
 
 
 # TFLITE INTERPRETER CON.
-interpreter = tf.contrib.lite.Interpreter(path_1)
+interpreter = tf.lite.Interpreter(path_1)
 interpreter.allocate_tensors()
 # obtaining the input-output shapes and types
 input_details = interpreter.get_input_details()
