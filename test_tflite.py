@@ -4,11 +4,12 @@ from tkinter import filedialog
 import PIL
 from PIL import Image
 import numpy as np
+import time
 # import cv2
 import argparse
 
 # DEF. PARAMETERS
-img_row, img_column = 256, 256
+img_row, img_column = 224, 224
 num_channel = 3
 num_batch = 1
 input_mean = 127.5
@@ -16,8 +17,8 @@ input_std = 127.5
 floating_model = False
 
 # include the path containing the model (.lite, .tflite)
-path_1 = r"./models/converted_svdmdl.tflite"
-labels_path = "./models/labels.txt"
+path_1 = r"./models/mobilenet_v2_1.0_224.tflite"
+labels_path = "./models/labels_mobilenet.txt"
 
 """
 parser = argparse.ArgumentParser()
@@ -46,9 +47,8 @@ def load_labels(filename):
     input_file = open(filename, 'r')
     for l in input_file:
         my_labels.append(l.strip())
-    print("\nLabels: ", my_labels)
+    # print("\nLabels: ", my_labels)
     return my_labels
-
 
 # TFLITE INTERPRETER CON.
 interpreter = tf.lite.Interpreter(path_1)
