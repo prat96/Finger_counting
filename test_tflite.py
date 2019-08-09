@@ -9,16 +9,16 @@ import time
 import argparse
 
 # DEF. PARAMETERS
-img_row, img_column = 224, 224
+img_row, img_column = 256, 256
 num_channel = 3
 num_batch = 1
-input_mean = 127.5
-input_std = 127.5
+input_mean = 0
+input_std = 255
 floating_model = False
 
 # include the path containing the model (.lite, .tflite)
-path_1 = r"./models/mobilenet_v2_1.0_224.tflite"
-labels_path = "./models/labels_mobilenet.txt"
+path_1 = r"./models/tf2_fingers.tflite"
+labels_path = "./models/labels.txt"
 
 """
 parser = argparse.ArgumentParser()
@@ -50,9 +50,9 @@ def load_labels(filename):
     # print("\nLabels: ", my_labels)
     return my_labels
 
+
 # TFLITE INTERPRETER CON.
-interpreter = tf.lite.Interpreter(path_1)
-interpreter.allocate_tensors()
+interpreter = tf.lite.Interpreter(model_path=path_1)
 # obtaining the input-output shapes and types
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
@@ -66,15 +66,12 @@ root = tk.Tk()
 root.withdraw()
 file_path = filedialog.askopenfilename()
 input_img = Image.open(file_path)
-# TODO check results after changing BGR2RGB
-# input_img = cv2.imread(file_path)
-# input_img = cv2.cvtColor(input_img, cv2.COLOR_BGR2RGB)
-# input_img = cv2.resize(input_img, (256, 256))
 
 input_img = input_img.resize((img_row, img_column))
 input_img = np.expand_dims(input_img, axis=0)
 
 input_img = (np.float32(input_img) - input_mean) / input_std
+# input_img = np.float32(input_img)
 
 interpreter.set_tensor(input_details[0]['index'], input_img)
 

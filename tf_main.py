@@ -3,24 +3,18 @@
 
 import tensorflow as tf
 
-from keras.models import load_model
-from keras.layers import Conv2D
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import Flatten
-from keras.layers import MaxPooling2D
 import numpy as np
 import cv2
 import os
 import glob
 import time
 
-from keras.utils import plot_model
+from tensorflow.python.keras.models import load_model
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 
 TRAIN = 1
 nbatch = 64
-IMG_SIZE = 224
+IMG_SIZE = 256
 
 
 def load_data():
@@ -49,22 +43,25 @@ def load_data():
 
 def train_model(train_gen, test_gen):
     model = tf.keras.models.Sequential([
-    tf.keras.layers.add(Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3))),
-    tf.keras.layers.add(Dropout(0.2)),
-    tf.keras.layers.add(MaxPooling2D((3, 3))),
-    tf.keras.layers.add(Conv2D(64, (3, 3), activation='relu')),
-    tf.keras.layers.add(Conv2D(64, (3, 3), activation='relu')),
-    tf.keras.layers.add(Dropout(0.4)),
-    tf.keras.layers.add(MaxPooling2D((3, 3))),
-    tf.keras.layers.add(Conv2D(128, (3, 3), activation='relu')),
-    tf.keras.layers.add(Dropout(0.4)),
-    tf.keras.layers.add(MaxPooling2D((3, 3))),
-    tf.keras.layers.add(Conv2D(32, (3, 3), activation='relu')),
-    tf.keras.layers.add(Flatten()),
-    tf.keras.layers.add(Dense(128, activation='relu')),
-    tf.keras.layers.add(Dropout(0.2)),
-    tf.keras.layers.add(Dense(6, activation='softmax')),
-])
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)),
+        # tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.MaxPooling2D((3, 3)),
+        tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
+        tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
+        # tf.keras.layers.Dropout(0.4),
+        tf.keras.layers.MaxPooling2D((3, 3)),
+        tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
+        # tf.keras.layers.Dropout(0.4),
+        tf.keras.layers.MaxPooling2D((3, 3)),
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu'),
+        # TODO reshape to [1,1152]
+        tf.keras.layers.Reshape((1, 1152)),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(128, activation='relu'),
+        # tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.Dense(6, activation='softmax')
+    ])
+
     model.summary()
 
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
@@ -76,7 +73,7 @@ def train_model(train_gen, test_gen):
     model.fit_generator(train_gen, steps_per_epoch=STEP_SIZE_TRAIN, epochs=5, validation_data=test_gen,
                         validation_steps=STEP_SIZE_TEST, use_multiprocessing=True, workers=6)
 
-    plot_model(model, to_file='model.png')
+    # plot_model(model, to_file='model.png')
 
     return model, STEP_SIZE_TEST, STEP_SIZE_TRAIN
 
@@ -103,7 +100,8 @@ def test_predictions(model):
         avg_inference += end
         no_of_files += 1
     os.chdir("/home/pratheek/Tonbo/Code/finger_counting")
-    print(avg_inference/no_of_files, no_of_files)
+    print(avg_inference / no_of_files, no_of_files)
+
 
 def load_trained_model():
     model_path = './models/fingers_white_latest.h5'

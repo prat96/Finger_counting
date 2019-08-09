@@ -1,0 +1,27 @@
+converter = tf.lite.TFLiteConverter.from_keras_model_file("keras_model.h5")
+2019-06-27 01:17:12.840438: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:716] Optimization results for grappler item: graph_to_optimize
+2019-06-27 01:17:12.840465: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:718]   function_optimizer: function_optimizer did nothing. time = 0.002ms.
+2019-06-27 01:17:12.840469: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:718]   function_optimizer: function_optimizer did nothing. time = 0ms.
+W0627 01:17:12.847323 140285898270528 deprecation.py:323] From /home/pratheek/.virtualenvs/dl4cv/lib/python3.6/site-packages/tensorflow/lite/python/util.py:238: convert_variables_to_constants (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.convert_variables_to_constants`
+W0627 01:17:12.847484 140285898270528 deprecation.py:323] From /home/pratheek/.virtualenvs/dl4cv/lib/python3.6/site-packages/tensorflow/python/framework/graph_util_impl.py:270: extract_sub_graph (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.extract_sub_graph`
+
+tflite_model = converter.convert()
+2019-06-27 01:18:55.484578: E tensorflow/core/grappler/grappler_item_builder.cc:637] Init node conv2d/kernel/Assign doesn't exist in graph
+
+
+
+
+
+
+
+
+
+import tensorflow as tf
+
+converter = tf.lite.TFLiteConverter.from_keras_model_file("keras_model.h5")
+tflite_model = converter.convert()
+open("converted_model.tflite", "wb").write(tflite_model)
