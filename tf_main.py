@@ -54,7 +54,6 @@ def train_model(train_gen, test_gen):
         # tf.keras.layers.Dropout(0.4),
         tf.keras.layers.MaxPooling2D((3, 3)),
         tf.keras.layers.Conv2D(32, (3, 3), activation='relu'),
-        # TODO reshape to [1,1152]
         tf.keras.layers.Reshape((1, 1152)),
         tf.keras.layers.Flatten(),
         tf.keras.layers.Dense(128, activation='relu'),
